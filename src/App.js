@@ -1,15 +1,12 @@
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import About from "./components/About";
-
+// import Header from "./components/Header";
+// import Footer from "./components/Footer";
+// import About from "./components/About";
+  import Form  from "./components/Form";
 function App(){
-
+ 
     return <>
     
-    <h1>hello</h1>
-    <Header title="header 1"/>
-    <About/>
-    <Footer/>
+    <Form  title="Please fill in this form to create an account !"/>
     </>
 }
 
