@@ -1,13 +1,16 @@
-// import Header from "./components/Header";
-// import Footer from "./components/Footer";
-// import About from "./components/About";
-  import Form  from "./components/Form";
+
+  import Signup  from "./components/Signup";
+import Navbar from "./components/Navbar";
+// import Booking from "./components/Booking";
 function App(){
- 
-    return <>
-    
-    <Form  title="Please fill in this form to create an account !"/>
-    </>
+
+
+    return( <>
+     <Navbar/>
+    <Signup  title="Please fill in this form to create an account !"/>
+    {/* <Booking/> */}
+  
+    </>);
 }
 
 
