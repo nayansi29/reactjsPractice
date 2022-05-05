@@ -1,8 +1,9 @@
-import './About.css';
-const Header= (props)=>{
+import { useParams } from "react-router-dom";
+const Header= ()=>{
 
+    let {category,id}=useParams();
     return(<>
-    <h1 id="about">hello {props.title}</h1></>)
+    <h1 >  header Page - {category} {id} </h1></>)
 
   
 }
