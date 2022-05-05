@@ -1,5 +1,4 @@
-
-  import Signup  from "./components/Signup";
+import Signup  from "./components/Signup";
 import Navbar from "./components/Navbar";
 import Booking from "./components/Booking";
 import Header from "./components/Header";
