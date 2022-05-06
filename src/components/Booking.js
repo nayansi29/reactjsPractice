@@ -42,6 +42,8 @@ function Booking() {
         <div className="Pay-left"></div>
         <div className="Pay-right">
           <table>
+            <thead></thead>
+            <tbody>
             <tr>
               <td>VAT</td>
               <td>20:-</td>
@@ -66,6 +68,7 @@ function Booking() {
                 <b>45:-</b>
               </td>
             </tr>
+            </tbody>
           </table>
           <br />
         </div>
