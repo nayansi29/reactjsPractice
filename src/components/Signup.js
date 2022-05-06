@@ -1,29 +1,29 @@
 import { useState } from "react";
 function Signup(props) {
 
-   
-   const [signupUser , setSignupUser] = useState({
-      fname:"",
-      lname:"",
-      email:"",
-      password:"",
-      confrmpass:"",
-   });
 
-   
-const handleInputs = (e)=>{
- 
-   const name=e.target.name;
-   const value=e.target.value;
+  const [signupUser, setSignupUser] = useState({
+    fname: "",
+    lname: "",
+    email: "",
+    password: "",
+    confrmpass: "",
+  });
 
-   setSignupUser({ ...signupUser, [name]:value });
-   
 
-}
-const handleSubmit = (e)=>{
+  const handleInputs = (e) => {
+
+    const name = e.target.name;
+    const value = e.target.value;
+
+    setSignupUser({ ...signupUser, [name]: value });
+
+
+  }
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-}
+  }
 
 
 

@@ -2,8 +2,8 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 const Dasboard = () => {
-  let navigate = useNavigate();
-  let data = {
+  const navigate = useNavigate();
+  const data = {
     name: "sonam",
   };
   return (

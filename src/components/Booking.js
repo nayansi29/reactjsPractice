@@ -1,5 +1,4 @@
 import "./Booking.css";
-
 function Booking() {
 
   return (
