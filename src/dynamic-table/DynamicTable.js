@@ -1,4 +1,5 @@
 import TableData from "./TableData";
+
 function DynamicTable() {
   // get table column
   const column = Object.keys(TableData[0]);
@@ -33,3 +34,4 @@ function DynamicTable() {
   );
 }
 export default DynamicTable;
+

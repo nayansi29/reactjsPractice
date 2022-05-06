@@ -1,49 +1,41 @@
-* {
-  margin: 0px;
-  padding: 0px;
-}
-
 body {
   margin: 0px 20px;
-}
-
-.inner-para p {
-  font-family: sans-serif;
-  line-height: 25px;
-  font-size: 14px;
-}
-
-.inner-heading h2 {
-  font-family: sans-serif;
-  font-size: 15px;
-}
-
-.common {
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: 20px;
-  text-align: center;
-  margin: 20px;
 }
 .header {
   background-color: #89d9896b;
   text-align: center;
+  box-sizing: border-box;
 }
 .head {
   padding: 20px;
 }
-
-.para {
-  font-family: sans-serif;
-  font-stretch: normal;
+.heading {
+  font-size: 30px;
 }
-.transition {
-  margin-top: 10px;
+.para {
+  font-stretch: normal;
+  line-height: 5px;
+  font-size: 16px;
+}
+.Painting {
   width: 100%;
+  padding-top: 20px;
+  height: 200px;
+}
+.Painting-left {
+  width: 90%;
+  float: left;
+  line-height: 10px;
+}
+.Painting-right {
+  width: 10%;
+  float: right;
+  padding-top: 40px;
 }
 .Pay {
   width: 100%;
   padding-top: 20px;
+  height: 200px;
 }
 .Pay-left {
   width: 90%;
@@ -52,19 +44,6 @@ body {
 .Pay-right {
   width: 10%;
   float: right;
-}
-.Painting {
-  width: 100%;
-  padding-top: 20px;
-}
-.Painting-left {
-  width: 90%;
-  float: left;
-}
-.Painting-right {
-  width: 10%;
-  float: right;
-  padding-top: 40px;
 }
 .contact {
   padding-top: 20px;
@@ -78,9 +57,13 @@ body {
   float: left;
   width: 50%;
 }
+.common {
+  line-height: 10px;
+}
 .inner-footer {
   background-color: #2c302ceb;
   text-align: center;
   font-family: sans-serif;
   color: white;
+  padding: 10px;
 }
