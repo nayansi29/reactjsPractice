@@ -3,9 +3,7 @@ import React from "react";
 
 function Signup(props) {
 
-  const error = {
-    color: "red",
-  }
+  const error = { color: "red" };
   const initialValues = { fname: "", lname: "", email: "", pass: "", confrmpass: "" };
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
@@ -37,12 +35,7 @@ function Signup(props) {
       console.log(formValues);
       const newRecord = { ...formValues };
       setRecords([...records, newRecord]);
-      setFormValues({ fname: "", lname: "", email: "", pass: "", confrmpass: "" })
-
-
-
-
-
+      setFormValues({ fname: "", lname: "", email: "", pass: "", confrmpass: "" });
     }
   }, [formErrors]);
 
@@ -79,128 +72,122 @@ function Signup(props) {
       errors.confrmpass = "Confirm Password not matched";
     }
     return errors;
-
-
   }
 
 
   return (
     <>
-      <div className="container mt-3" >
 
-        {Object.keys(formErrors).length === 0 && isSubmit ? (<div> successfully signed In</div>) : ''}
-        <br />
-        <br />
-        <br />
-        <div className="row">
-          <div className="col-lg-4"></div>
-          <div className="col-lg-4">
-            <form className="needs-validation" onSubmit={handleSubmit} method="post">
-              <h3>Sign Up</h3>
-              <small>{props.title}</small>
-              <br />
-              <div className="row">
-                <div className="col-md-6 mb-3">
-                  <label htmlFor="fname">First name</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="fname"
-                    id="fname"
-                    value={formValues.fname}
-                    onChange={handleChange}
-
-
-                  />
-                  <p style={error}>{formErrors.fname}</p>
-                </div>
-                <div className="col-md-6 mb-3">
-                  <label htmlFor="lname">Last name</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="lname"
-                    id="lname"
-                    value={formValues.lname}
-                    onChange={handleChange}
-
-
-                  />
-                  <p style={error}>{formErrors.lname}</p>
-                </div>
+      {Object.keys(formErrors).length === 0 && isSubmit ? (<div className="col-lg-4">
+        {
+          records.map((data) => {
+            return (
+              <div>
+                <h1>Successfully Signed In</h1>
+                <p> First Name:{data.fname}</p>
+                <p>Last Name:{data.lname}</p>
+                <p>Email:{data.email}</p>
+                <p>Password:{data.pass}</p>
+                <p>Confirm Password:{data.confrmpass}</p>
               </div>
-              <div className="mb-3">
-                <label htmlFor="email">Email </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="email"
-                  id="email"
-                  value={formValues.email}
-                  onChange={handleChange}
 
+            )
+          })
+        }
+      </div>) :
+        <div className="container mt-3" >
 
-
-                />
-                <p style={error}>{formErrors.email}</p>
-              </div>
-              <div className="mb-3">
-                <label htmlFor="pass">Password</label>
-                <input
-                  type="password"
-                  className="form-control"
-                  name="pass"
-                  id="pass"
-                  value={formValues.pass}
-                  onChange={handleChange}
-
-                />
-                <p style={error}>{formErrors.pass}</p>
-              </div>
-              <div className="mb-3">
-                <label htmlFor="confrmpass"> Confirm Password</label>
-                <input
-                  type="password"
-                  className="form-control"
-                  name="confrmpass"
-                  id="confrmpass"
-                  value={formValues.confrmpass}
-                  onChange={handleChange}
-
-                />
-                <p style={error}>{formErrors.confrmpass}</p>
-              </div>
-              <button
-                className="btn btn-primary btn-lg btn-block"
-                id="submit"
-                type="submit"
-
-              >
-                Sign Up
-              </button>
-            </form>
-          </div>
-          <div className="col-lg-4">
-            {
-              records.map((data) => {
-                return (
-                  <div>
-                    <p> First Name:{data.fname}</p>
-                    <p>Last Name:{data.lname}</p>
-                    <p>Email:{data.email}</p>
-                    <p>Password:{data.pass}</p>
-                    <p>Confirm Password:{data.confrmpass}</p>
+          <br />
+          <br />
+          <br />
+          <div className="row">
+            <div className="col-lg-4"></div>
+            <div className="col-lg-4">
+              <form className="needs-validation" onSubmit={handleSubmit} method="post">
+                <h3>Sign Up</h3>
+                <small>{props.title}</small>
+                <br />
+                <div className="row">
+                  <div className="col-md-6 mb-3">
+                    <label htmlFor="fname">First name</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      name="fname"
+                      id="fname"
+                      value={formValues.fname}
+                      onChange={handleChange}
+                    />
+                    <p style={error}>{formErrors.fname}</p>
                   </div>
+                  <div className="col-md-6 mb-3">
+                    <label htmlFor="lname">Last name</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      name="lname"
+                      id="lname"
+                      value={formValues.lname}
+                      onChange={handleChange}
+                    />
+                    <p style={error}>{formErrors.lname}</p>
+                  </div>
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="email">Email </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="email"
+                    id="email"
+                    value={formValues.email}
+                    onChange={handleChange}
+                  />
+                  <p style={error}>{formErrors.email}</p>
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="pass">Password</label>
+                  <input
+                    type="password"
+                    className="form-control"
+                    name="pass"
+                    id="pass"
+                    value={formValues.pass}
+                    onChange={handleChange}
+                  />
+                  <p style={error}>{formErrors.pass}</p>
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="confrmpass"> Confirm Password</label>
+                  <input
+                    type="password"
+                    className="form-control"
+                    name="confrmpass"
+                    id="confrmpass"
+                    value={formValues.confrmpass}
+                    onChange={handleChange}
+                  />
+                  <p style={error}>{formErrors.confrmpass}</p>
+                </div>
+                <button
+                  className="btn btn-primary btn-lg btn-block"
+                  id="submit"
+                  type="submit"
 
-                )
-              })
-            }
+                >
+                  Sign Up
+                </button>
+              </form>
+            </div>
+            <div className="col-lg-4">
+
+            </div>
           </div>
         </div>
-      </div>
-
+      }
     </>
   );
 }
+
 
 export default Signup;

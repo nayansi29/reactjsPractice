@@ -5,7 +5,6 @@ import Booking from "./components/Booking";
 import Header from "./components/Header";
 import Login from "./components/Login";
 import Logout from "./components/Logout";
-import Form from "./components/Form";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Dasboard from "./components/Dasboard";
 import DynamicTable from "./dynamic-table/DynamicTable";
@@ -28,7 +27,6 @@ function App() {
         <Route path="/dashboard" element={isLogged ? <Dasboard /> : <Navigate to="/login" state={data} replace />} />
         <Route path="/header/:category" element={<Header />} />
         <Route path="/header/:category/:id" element={<Header />} />
-        <Route path="/form" element={<Form />} />
         <Route path="*" element={<h1> Error 404 Page Not Found</h1>} />
       </Routes>
     </BrowserRouter>
