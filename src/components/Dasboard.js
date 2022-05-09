@@ -6,6 +6,7 @@ const Dasboard = () => {
   const data = {
     name: "sonam",
   };
+
   return (
     <>
       <h1>Dasboard</h1>

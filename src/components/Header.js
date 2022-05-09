@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-
+import React from "react";
 const Header = () => {
 
   const { category, id } = useParams();

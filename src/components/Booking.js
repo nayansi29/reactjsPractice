@@ -1,3 +1,4 @@
+import React from "react";
 import "./Booking.css";
 function Booking() {
 
@@ -15,7 +16,6 @@ function Booking() {
       <center>
         <h2>Booking details</h2>
       </center>
-
       <section>
         <div className="booking">
           <h6>
@@ -30,7 +30,6 @@ function Booking() {
           <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2022-04-20 - 08:00</p>
         </div>
       </section>
-
       <hr />
       <section className="Painting">
         <div className="Painting-left">
@@ -45,7 +44,6 @@ function Booking() {
         </div>
       </section>
       <hr />
-
       <section className="Pay">
         <div className="Pay-left"></div>
         <div className="Pay-right">

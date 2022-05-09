@@ -1,5 +1,5 @@
 import TableData from "./TableData";
-
+import React from "react";
 function DynamicTable() {
   // get table column
   const column = Object.keys(TableData[0]);
