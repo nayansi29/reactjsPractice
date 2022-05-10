@@ -58,7 +58,12 @@ function Signup() {
   }
   else {
     return (
-      <SignupForm formValues={formValues} formErrors={formErrors} handleChange={handleChange} handleSubmit={handleSubmit} />
+      <SignupForm
+        formValues={formValues}
+        formErrors={formErrors}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+      />
     );
   }
 }
