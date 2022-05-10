@@ -48,30 +48,33 @@ function Booking() {
         <div className="Pay-left"></div>
         <div className="Pay-right">
           <table>
-            <tr>
-              <td>VAT</td>
-              <td>20:-</td>
-            </tr>
-            <tr>
-              <td>RUT/ROT</td>
-              <td>45:-</td>
-            </tr>
-            <tr>
-              <td>Discount</td>
-              <td>10:-</td>
-            </tr>
-            <tr>
-              <td>Total</td>
-              <td>100:-</td>
-            </tr>
-            <tr>
-              <td>
-                <b>To Pay</b>
-              </td>
-              <td>
-                <b>45:-</b>
-              </td>
-            </tr>
+            <thead></thead>
+            <tbody>
+              <tr>
+                <td>VAT</td>
+                <td>20:-</td>
+              </tr>
+              <tr>
+                <td>RUT/ROT</td>
+                <td>45:-</td>
+              </tr>
+              <tr>
+                <td>Discount</td>
+                <td>10:-</td>
+              </tr>
+              <tr>
+                <td>Total</td>
+                <td>100:-</td>
+              </tr>
+              <tr>
+                <td>
+                  <b>To Pay</b>
+                </td>
+                <td>
+                  <b>45:-</b>
+                </td>
+              </tr>
+            </tbody>
           </table>
           <br />
         </div>

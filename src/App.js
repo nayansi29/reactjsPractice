@@ -19,7 +19,7 @@ function App() {
     <BrowserRouter>
       <Navbar />
       <Routes>
-        <Route path="/signUp" element={<Signup title="Please fill in this form to create an account !" />} />
+        <Route path="/signUp" element={<Signup />} />
         <Route path="/booking" element={<Booking />} />
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Logout />} />

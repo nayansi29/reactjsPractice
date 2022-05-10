@@ -1,47 +1,25 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import './signup.css';
 import React from "react";
+import SignupForm from "./SignupForm";
+import SignupDetails from "./SignupDetails";
 
-function Signup(props) {
-
-  const error = { color: "red" };
-  const initialValues = { fname: "", lname: "", email: "", pass: "", confrmpass: "" };
+function Signup() {
+  const initialValues = { fname: "", lname: "", email: "", password: "", confirmPassword: "" };
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
-  const [records, setRecords] = useState([]);
-
-
   const handleChange = (e) => {
-
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
-    console.log(formValues);
-
-
   }
-
   const handleSubmit = (e) => {
-
+    console.log("hello");
     e.preventDefault();
     setFormErrors(validate(formValues));
     setIsSubmit(true);
-
-
   }
-
-  useEffect(() => {
-    console.log(formErrors);
-    if (Object.keys(formErrors).length === 0 && isSubmit) {
-      console.log(formValues);
-      const newRecord = { ...formValues };
-      setRecords([...records, newRecord]);
-      setFormValues({ fname: "", lname: "", email: "", pass: "", confrmpass: "" });
-    }
-  }, [formErrors]);
-
-
   const validate = (values) => {
-
     const errors = {};
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
     if (!values.fname) {
@@ -56,138 +34,32 @@ function Signup(props) {
     else if (!regex.test(values.email)) {
       errors.email = "Please Enter Valid Email";
     }
-    if (!values.pass) {
-      errors.pass = "Password is required";
+    if (!values.password) {
+      errors.password = "Password is required";
     }
-    else if (values.pass.length < 4) {
-      errors.pass = "Password must be more than 4 character";
+    else if (values.password.length < 4) {
+      errors.password = "Password must be more than 4 character";
     }
-    else if (values.pass.length > 10) {
-      errors.pass = "Password cannot exceed more than 10 character";
+    else if (values.password.length > 10) {
+      errors.password = "Password cannot exceed more than 10 character";
     }
-    if (!values.confrmpass) {
-      errors.confrmpass = "Confirm Password is required";
+    if (!values.confirmPassword) {
+      errors.confirmPassword = "Confirm Password is required";
     }
-    else if (values.pass !== values.confrmpass) {
-      errors.confrmpass = "Confirm Password not matched";
+    else if (values.password !== values.confirmPassword) {
+      errors.confirmPassword = "Confirm Password not matched";
     }
     return errors;
   }
+  if (isSubmit && Object.keys(formErrors).length === 0) {
+    return (
+      <SignupDetails formValues={formValues} />
 
-
-  return (
-    <>
-
-      {Object.keys(formErrors).length === 0 && isSubmit ? (<div className="col-lg-4">
-        {
-          records.map((data) => {
-            return (
-              <div>
-                <h1>Successfully Signed In</h1>
-                <p> First Name:{data.fname}</p>
-                <p>Last Name:{data.lname}</p>
-                <p>Email:{data.email}</p>
-                <p>Password:{data.pass}</p>
-                <p>Confirm Password:{data.confrmpass}</p>
-              </div>
-
-            )
-          })
-        }
-      </div>) :
-        <div className="container mt-3" >
-
-          <br />
-          <br />
-          <br />
-          <div className="row">
-            <div className="col-lg-4"></div>
-            <div className="col-lg-4">
-              <form className="needs-validation" onSubmit={handleSubmit} method="post">
-                <h3>Sign Up</h3>
-                <small>{props.title}</small>
-                <br />
-                <div className="row">
-                  <div className="col-md-6 mb-3">
-                    <label htmlFor="fname">First name</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      name="fname"
-                      id="fname"
-                      value={formValues.fname}
-                      onChange={handleChange}
-                    />
-                    <p style={error}>{formErrors.fname}</p>
-                  </div>
-                  <div className="col-md-6 mb-3">
-                    <label htmlFor="lname">Last name</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      name="lname"
-                      id="lname"
-                      value={formValues.lname}
-                      onChange={handleChange}
-                    />
-                    <p style={error}>{formErrors.lname}</p>
-                  </div>
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="email">Email </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="email"
-                    id="email"
-                    value={formValues.email}
-                    onChange={handleChange}
-                  />
-                  <p style={error}>{formErrors.email}</p>
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="pass">Password</label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    name="pass"
-                    id="pass"
-                    value={formValues.pass}
-                    onChange={handleChange}
-                  />
-                  <p style={error}>{formErrors.pass}</p>
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="confrmpass"> Confirm Password</label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    name="confrmpass"
-                    id="confrmpass"
-                    value={formValues.confrmpass}
-                    onChange={handleChange}
-                  />
-                  <p style={error}>{formErrors.confrmpass}</p>
-                </div>
-                <button
-                  className="btn btn-primary btn-lg btn-block"
-                  id="submit"
-                  type="submit"
-
-                >
-                  Sign Up
-                </button>
-              </form>
-            </div>
-            <div className="col-lg-4">
-
-            </div>
-          </div>
-        </div>
-      }
-    </>
-  );
+    )
+  }
+  else {
+    return (<SignupForm handleChange={handleChange} handleSubmit={handleSubmit} formValues={formValues} />
+    );
+  }
 }
-
-
 export default Signup;

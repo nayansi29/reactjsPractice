@@ -6,7 +6,7 @@ const Login = () => {
   return (
     <>
       <h1> Login Page</h1>
-      <h3>{location.state.user}</h3>
+      {/* <h3>{location.state.user}</h3> */}
     </>
   );
 };
