@@ -14,7 +14,6 @@ function Signup() {
     setFormValues({ ...formValues, [name]: value });
   }
   const handleSubmit = (e) => {
-    console.log("hello");
     e.preventDefault();
     setFormErrors(validate(formValues));
     setIsSubmit(true);
@@ -58,7 +57,8 @@ function Signup() {
     )
   }
   else {
-    return (<SignupForm handleChange={handleChange} handleSubmit={handleSubmit} formValues={formValues} />
+    return (
+      <SignupForm formValues={formValues} formErrors={formErrors} handleChange={handleChange} handleSubmit={handleSubmit} />
     );
   }
 }

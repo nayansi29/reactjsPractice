@@ -12,5 +12,4 @@ const SignupDetails = (props) => {
     </div>
   );
 }
-
 export default SignupDetails;
