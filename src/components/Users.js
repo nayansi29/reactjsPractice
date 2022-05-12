@@ -9,6 +9,7 @@ export default class Users extends Component {
     axios.get(`https://jsonplaceholder.typicode.com/users`)
       .then(res => {
         const persons = res.data;
+        console.log(persons);
         this.setState({ persons });
       })
   }
@@ -23,6 +24,14 @@ export default class Users extends Component {
           <td>{user.phone}</td>
           <td>{user.website}</td>
           <td>{user.address.street}</td>
+          <td>{user.address.suite}</td>
+          <td>{user.address.city}</td>
+          <td>{user.address.zipcode}</td>
+          <td>{user.company.name}</td>
+          <td>{user.company.catchPhrase}</td>
+          <td>{user.company.bs}</td>
+          <td>{user.address.geo.lat}</td>
+          <td>{user.address.geo.lng}</td>
         </tr>
       )
     });
@@ -41,7 +50,14 @@ export default class Users extends Component {
               <th>Phone</th>
               <th>Website</th>
               <th>Address street</th>
-
+              <th>Address suite</th>
+              <th>Address city</th>
+              <th>Address Zipcode</th>
+              <th>company Name</th>
+              <th>company catchPhrase</th>
+              <th>company bs</th>
+              <th>geo lat</th>
+              <th>geo  lng</th>
             </tr>
           </thead>
           <tbody>{this.renderTable()}</tbody>
