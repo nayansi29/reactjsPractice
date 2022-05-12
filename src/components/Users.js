@@ -3,20 +3,26 @@ import axios from 'axios';
 
 export default class Users extends Component {
   state = {
-    persons: []
+    persons: [],
+    loading: true,
+  };
+  getRequest = async () => {
+    try {
+      const res = await axios.get('https://jsonplaceholder.typicode.com/users');
+      const persons = res.data;
+      this.setState({ persons });
+      this.setState({ loading: false });
+    } catch (err) {
+      console.error(err);
+    }
   }
   componentDidMount() {
-    axios.get(`https://jsonplaceholder.typicode.com/users`)
-      .then(res => {
-        const persons = res.data;
-        console.log(persons);
-        this.setState({ persons });
-      })
+    this.getRequest();
   }
   renderTable = () => {
     return this.state.persons.map(user => {
       return (
-        <tr>
+        <tr key={user.id}>
           <td>{user.id}</td>
           <td>{user.name}</td>
           <td>{user.username}</td>
@@ -37,32 +43,44 @@ export default class Users extends Component {
     });
   }
   render() {
-    return (
-      <div>
-        <h1 id="title">API Table</h1>
-        <table id="users" className='table'>
-          <thead>
-            <tr>
-              <th>id</th>
-              <th>Name</th>
-              <th>UserName</th>
-              <th>Email</th>
-              <th>Phone</th>
-              <th>Website</th>
-              <th>Address street</th>
-              <th>Address suite</th>
-              <th>Address city</th>
-              <th>Address Zipcode</th>
-              <th>company Name</th>
-              <th>company catchPhrase</th>
-              <th>company bs</th>
-              <th>geo lat</th>
-              <th>geo  lng</th>
-            </tr>
-          </thead>
-          <tbody>{this.renderTable()}</tbody>
-        </table>
-      </div>
-    )
+    if (this.state.loading) {
+      return (
+        <div>Loading...</div>
+      );
+    }
+    else if (this.state.persons.length === 0) {
+      return (
+        <div>No Data Found</div>
+      );
+    }
+    else {
+      return (
+        <div>
+          <h1 id="title">API Table</h1>
+          <table id="users" className='table'>
+            <thead>
+              <tr>
+                <th>id</th>
+                <th>Name</th>
+                <th>UserName</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Website</th>
+                <th>Address street</th>
+                <th>Address suite</th>
+                <th>Address city</th>
+                <th>Address Zipcode</th>
+                <th>company Name</th>
+                <th>company catchPhrase</th>
+                <th>company bs</th>
+                <th>geo lat</th>
+                <th>geo  lng</th>
+              </tr>
+            </thead>
+            <tbody>{this.renderTable()}</tbody>
+          </table>
+        </div>
+      )
+    }
   }
 }
