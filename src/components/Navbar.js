@@ -28,6 +28,10 @@ function Navbar() {
             <NavLink className="nav-link" to="/login" style={setActive}>Login</NavLink>
           </li>
 
+          <li className="nav-item">
+            <NavLink className="nav-link" to="/users" style={setActive}>Users</NavLink>
+          </li>
+
         </ul>
       </div>
     </nav>
