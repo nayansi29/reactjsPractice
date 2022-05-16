@@ -6,7 +6,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
-// import CloseIcon from '@mui/icons-material/Close';
+import CloseIcon from "@material-ui/icons/Close";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
@@ -39,7 +39,7 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
             color: (theme) => theme.palette.grey[500],
           }}
         >
-          {/* <CloseIcon /> */}
+          <CloseIcon />
         </IconButton>
       ) : null}
     </DialogTitle>
@@ -48,23 +48,23 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
 export default function BasicModal({ data }) {
   const [open, setOpen] = React.useState(true);
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-  // const handleClose = () => {
-  //     setOpen(false);
+  // const handleClickOpen = () => {
+  //   setOpen(true);
   // };
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <div>
       <BootstrapDialog
-        // onClose={handleClose}
-        onClick={handleClickOpen}
+        onClose={handleClose}
+        // onClick={handleClickOpen}
         aria-labelledby="customized-dialog-title"
         open={open}
       >
-        <BootstrapDialogTitle id="customized-dialog-title">
-          Modal title
+        <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
+          Users Data
         </BootstrapDialogTitle>
         <DialogContent dividers>
           <Box
@@ -153,7 +153,7 @@ export default function BasicModal({ data }) {
           </Box>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus>
+          <Button autoFocus onClick={handleClose}>
             Save changes
           </Button>
         </DialogActions>
