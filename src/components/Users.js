@@ -22,7 +22,9 @@ export default class Users extends Component {
     this.getRequest();
   }
   handleInput(user) {
-    this.setState({ open: true, data: user })
+    this.setState({ data: user });
+    this.setState({ open: true });
+
   }
   renderTable = () => {
     return this.state.persons.map(user => {

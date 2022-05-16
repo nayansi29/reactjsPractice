@@ -11,8 +11,6 @@ import CloseIcon from "@material-ui/icons/Close";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
-
-
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
     padding: theme.spacing(2),
@@ -21,10 +19,8 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     padding: theme.spacing(1),
   },
 }));
-
 const BootstrapDialogTitle = (props) => {
   const { children, onClose, ...other } = props;
-
   return (
     <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
       {children}
@@ -52,15 +48,15 @@ BootstrapDialogTitle.propTypes = {
 };
 
 export default function BasicModal(props) {
-  console.log(props.data);
+  const [open, setOpen] = React.useState(props.open);
 
-  const [open, setOpen] = React.useState(false);
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+
   const handleClose = () => {
     setOpen(false);
+
+
+
   };
 
   return (
@@ -112,51 +108,61 @@ export default function BasicModal(props) {
               label="Website"
               value={props.data.website}
             />
-            <TextField
+            {props.data.address && <TextField
               id="outlined-uncontrolled"
               label="Address Street"
-            // value={props.data.address.street}
+              value={props.data.address.street}
             />
-            <TextField
+            }
+            {props.data.address && <TextField
               id="outlined-uncontrolled"
               label="Address Suite"
-            // value={props.data.address.suite}
+              value={props.data.address.street}
             />
-            <TextField
+            }
+            {props.data.address && <TextField
               id="outlined-uncontrolled"
               label="Address city"
-            // value={props.data.address.city}
+              value={props.data.address.city}
             />
-            <TextField
+            }
+
+            {props.data.address && <TextField
               id="outlined-uncontrolled"
               label="Address zipcode"
-            // value={props.data.address.zipcode}
+              value={props.data.address.zipcode}
             />
-            <TextField
+            }
+            {props.data.company && <TextField
               id="outlined-uncontrolled"
               label="Company Name"
-            // value={props.data.company.name}
+              value={props.data.company.name}
             />
-            <TextField
+            }
+            {props.data.company && <TextField
               id="outlined-uncontrolled"
               label="company catchPhrase"
-            // value={props.data.company.catchPhrase}
+              value={props.data.company.catchPhrase}
             />
-            <TextField
+            }
+            {props.data.company && <TextField
               id="outlined-uncontrolled"
               label="company bs"
-            // value={props.data.company.bs}
+              value={props.data.company.bs}
             />
-            <TextField
+            }
+            {props.data.address && <TextField
               id="outlined-uncontrolled"
               label="geo lat"
-            // value={props.data.address.geo.lat}
+              value={props.data.address.geo.lat}
             />
-            <TextField
+            }
+            {props.data.address && <TextField
               id="outlined-uncontrolled"
               label="geo lag"
-            // value={props.data.address.geo.lat}
+              value={props.data.address.geo.lat}
             />
+            }
           </Box>
         </DialogContent>
         <DialogActions>
