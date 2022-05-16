@@ -32,6 +32,10 @@ function Navbar() {
             <NavLink className="nav-link" to="/users" style={setActive}>Users</NavLink>
           </li>
 
+          {/* <li className="nav-item">
+            <NavLink className="nav-link" to="/userdata" style={setActive}>UserData</NavLink>
+          </li> */}
+
         </ul>
       </div>
     </nav>

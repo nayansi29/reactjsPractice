@@ -9,6 +9,7 @@ import Logout from "./components/Logout";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Dasboard from "./components/Dasboard";
 import DynamicTable from "./dynamic-table/DynamicTable";
+import UserData from "./components/UserData";
 
 function App() {
 
@@ -16,7 +17,6 @@ function App() {
   const data = { user: 'user Not Logged In', };
 
   return (
-
     <BrowserRouter>
       <Navbar />
       <Routes>
@@ -26,16 +26,13 @@ function App() {
         <Route path="/logout" element={<Logout />} />
         <Route path="/table" element={<DynamicTable />} />
         <Route path="/users" element={<Users />} />
+        {/* <Route path="/userdata" element={<UserData />} /> */}
         <Route path="/dashboard" element={isLogged ? <Dasboard /> : <Navigate to="/login" state={data} replace />} />
         <Route path="/header/:category" element={<Header />} />
         <Route path="/header/:category/:id" element={<Header />} />
         <Route path="*" element={<h1> Error 404 Page Not Found</h1>} />
       </Routes>
     </BrowserRouter>
-
-
   );
 }
-
-
 export default App;

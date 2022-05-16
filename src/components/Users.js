@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 import axios from 'axios';
+import BasicModal from './BasicModal';
 
 export default class Users extends Component {
   state = {
     persons: [],
     loading: true,
+    open: false,
+    data: [],
   };
   getRequest = async () => {
     try {
@@ -19,10 +22,14 @@ export default class Users extends Component {
   componentDidMount() {
     this.getRequest();
   }
+  handleInput(user) {
+    this.setState({ data: user })
+    this.setState({ open: true });
+  }
   renderTable = () => {
     return this.state.persons.map(user => {
       return (
-        <tr key={user.id}>
+        <tr key={user.id} onClick={() => { this.handleInput(user) }}>
           <td>{user.id}</td>
           <td>{user.name}</td>
           <td>{user.username}</td>
@@ -45,13 +52,19 @@ export default class Users extends Component {
   render() {
     if (this.state.loading) {
       return (
-        <div>Loading...</div>
+
+        <div>Loading Please...</div>
       );
     }
     else if (this.state.persons.length === 0) {
       return (
         <div>No Data Found</div>
       );
+    }
+    else if (this.state.open) {
+      return (
+        <BasicModal data={this.state.data} />
+      )
     }
     else {
       return (
@@ -84,3 +97,5 @@ export default class Users extends Component {
     }
   }
 }
+
+
