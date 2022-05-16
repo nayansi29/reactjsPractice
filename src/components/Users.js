@@ -13,8 +13,7 @@ export default class Users extends Component {
     try {
       const res = await axios.get('https://jsonplaceholder.typicode.com/users');
       const persons = res.data;
-      this.setState({ persons });
-      this.setState({ loading: false });
+      this.setState({ persons, loading: false });
     } catch (err) {
       console.error(err);
     }
@@ -23,8 +22,7 @@ export default class Users extends Component {
     this.getRequest();
   }
   handleInput(user) {
-    this.setState({ data: user })
-    this.setState({ open: true });
+    this.setState({ open: true, data: user })
   }
   renderTable = () => {
     return this.state.persons.map(user => {
@@ -61,14 +59,11 @@ export default class Users extends Component {
         <div>No Data Found</div>
       );
     }
-    else if (this.state.open) {
-      return (
-        <BasicModal data={this.state.data} />
-      )
-    }
+
     else {
       return (
         <div>
+          <BasicModal open={this.state.open} data={this.state.data} />
           <h1 id="title">API Table</h1>
           <table id="users" className='table'>
             <thead>

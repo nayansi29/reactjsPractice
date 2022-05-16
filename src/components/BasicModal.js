@@ -1,4 +1,5 @@
 import * as React from 'react';
+import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
@@ -10,6 +11,8 @@ import CloseIcon from "@material-ui/icons/Close";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
+
+
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
     padding: theme.spacing(2),
@@ -18,13 +21,10 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     padding: theme.spacing(1),
   },
 }));
-export interface DialogTitleProps {
-  id: string;
-  children?: React.ReactNode;
-  onClose: () => void;
-}
-const BootstrapDialogTitle = (props: DialogTitleProps) => {
+
+const BootstrapDialogTitle = (props) => {
   const { children, onClose, ...other } = props;
+
   return (
     <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
       {children}
@@ -45,12 +45,20 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
     </DialogTitle>
   );
 };
-export default function BasicModal({ data }) {
-  const [open, setOpen] = React.useState(true);
 
-  // const handleClickOpen = () => {
-  //   setOpen(true);
-  // };
+BootstrapDialogTitle.propTypes = {
+  children: PropTypes.node,
+  onClose: PropTypes.func.isRequired,
+};
+
+export default function BasicModal(props) {
+  console.log(props.data);
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
   const handleClose = () => {
     setOpen(false);
   };
@@ -59,12 +67,11 @@ export default function BasicModal({ data }) {
     <div>
       <BootstrapDialog
         onClose={handleClose}
-        // onClick={handleClickOpen}
         aria-labelledby="customized-dialog-title"
-        open={open}
+        open={props.open}
       >
         <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
-          Users Data
+          Modal title
         </BootstrapDialogTitle>
         <DialogContent dividers>
           <Box
@@ -78,77 +85,77 @@ export default function BasicModal({ data }) {
             <TextField
               id="outlined-uncontrolled"
               label="id"
-              value={data.id}
+              value={props.data.id}
             />
             <TextField
               id="outlined-uncontrolled"
               label="Name"
-              value={data.name}
+              value={props.data.name}
             />
             <TextField
               id="outlined-uncontrolled"
               label="UserName"
-              value={data.username}
+              value={props.data.username}
             />
             <TextField
               id="outlined-uncontrolled"
               label="Email"
-              value={data.email}
+              value={props.data.email}
             />
             <TextField
               id="outlined-uncontrolled"
               label="Phone"
-              value={data.phone}
+              value={props.data.phone}
             />
             <TextField
               id="outlined-uncontrolled"
               label="Website"
-              value={data.website}
+              value={props.data.website}
             />
             <TextField
               id="outlined-uncontrolled"
               label="Address Street"
-              value={data.address.street}
+            // value={props.data.address.street}
             />
             <TextField
               id="outlined-uncontrolled"
               label="Address Suite"
-              value={data.address.suite}
+            // value={props.data.address.suite}
             />
             <TextField
               id="outlined-uncontrolled"
               label="Address city"
-              value={data.address.city}
+            // value={props.data.address.city}
             />
             <TextField
               id="outlined-uncontrolled"
               label="Address zipcode"
-              value={data.address.zipcode}
+            // value={props.data.address.zipcode}
             />
             <TextField
               id="outlined-uncontrolled"
               label="Company Name"
-              value={data.company.name}
+            // value={props.data.company.name}
             />
             <TextField
               id="outlined-uncontrolled"
               label="company catchPhrase"
-              value={data.company.catchPhrase}
+            // value={props.data.company.catchPhrase}
             />
             <TextField
               id="outlined-uncontrolled"
               label="company bs"
-              value={data.company.bs}
+            // value={props.data.company.bs}
             />
             <TextField
               id="outlined-uncontrolled"
               label="geo lat"
-              value={data.address.geo.lat}
+            // value={props.data.address.geo.lat}
             />
             <TextField
               id="outlined-uncontrolled"
               label="geo lag"
-              value={data.address.geo.lat}
+            // value={props.data.address.geo.lat}
             />
           </Box>
         </DialogContent>
