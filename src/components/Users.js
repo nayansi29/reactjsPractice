@@ -22,9 +22,10 @@ export default class Users extends Component {
     this.getRequest();
   }
   handleInput(user) {
-    this.setState({ data: user });
-    this.setState({ open: true });
-
+    this.setState({ data: user, open: true });
+  }
+  closeButton = () => {
+    this.setState({ open: false });
   }
   renderTable = () => {
     return this.state.persons.map(user => {
@@ -61,11 +62,10 @@ export default class Users extends Component {
         <div>No Data Found</div>
       );
     }
-
     else {
       return (
         <div>
-          <BasicModal open={this.state.open} data={this.state.data} />
+          <BasicModal open={this.state.open} data={this.state.data} closeButton={this.closeButton} />
           <h1 id="title">API Table</h1>
           <table id="users" className='table'>
             <thead>

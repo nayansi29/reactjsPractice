@@ -41,32 +41,19 @@ const BootstrapDialogTitle = (props) => {
     </DialogTitle>
   );
 };
-
 BootstrapDialogTitle.propTypes = {
   children: PropTypes.node,
   onClose: PropTypes.func.isRequired,
 };
-
 export default function BasicModal(props) {
-  const [open, setOpen] = React.useState(props.open);
-
-
-
-  const handleClose = () => {
-    setOpen(false);
-
-
-
-  };
-
   return (
     <div>
       <BootstrapDialog
-        onClose={handleClose}
+        onClose={props.closeButton}
         aria-labelledby="customized-dialog-title"
         open={props.open}
       >
-        <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
+        <BootstrapDialogTitle id="customized-dialog-title" onClose={props.closeButton}>
           Modal title
         </BootstrapDialogTitle>
         <DialogContent dividers>
@@ -126,7 +113,6 @@ export default function BasicModal(props) {
               value={props.data.address.city}
             />
             }
-
             {props.data.address && <TextField
               id="outlined-uncontrolled"
               label="Address zipcode"
@@ -166,7 +152,7 @@ export default function BasicModal(props) {
           </Box>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose}>
+          <Button autoFocus onClick={props.closeButton}>
             Save changes
           </Button>
         </DialogActions>
