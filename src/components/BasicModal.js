@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from "react";
 import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
@@ -10,6 +11,7 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from "@material-ui/icons/Close";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -46,6 +48,58 @@ BootstrapDialogTitle.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 export default function BasicModal(props) {
+  const [user, setUser] = useState({ ...props.data });
+  const [userDetails, setUserDetails] = useState({});
+  React.useEffect(() => {
+    setUser(props.data);
+  }, [props.data])
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUser({ ...user, [name]: value });
+  }
+  const handleAddress = (e) => {
+    user.address[e.target.name] = e.target.value
+    setUser({ ...user })
+  }
+  const handleAddressGeo = (e) => {
+    user.address.geo[e.target.name] = e.target.value
+    setUser({ ...user })
+    console.log(user);
+  }
+  const handleCompany = (e) => {
+    user.company[e.target.name] = e.target.value
+    setUser({ ...user });
+
+  }
+
+  const updateChanges = () => {
+    const items = { ...user };
+    const userId = items.id;
+    // axios.put('https://jsonplaceholder.typicode.com/users/{userId}', items)
+    //   .then(res => {
+    //     console.log(res.data);
+    //     // setData(res.data);
+    //     setLoading(false);
+    //   }).catch(error => {
+    //     setLoading(false);
+    //     console.log(error);
+    //   });
+    fetch(`https://jsonplaceholder.typicode.com/users/${userId}`, {
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(items)
+    }).then((result) => {
+      result.json()
+        .then((resp) => {
+          setUserDetails({ resp });
+          console.warn(resp);
+        })
+    });
+    props.closeButton();
+  }
   return (
     <div>
       <BootstrapDialog
@@ -68,91 +122,123 @@ export default function BasicModal(props) {
             <TextField
               id="outlined-uncontrolled"
               label="id"
-              value={props.data.id}
+              name="id"
+              disabled
+              value={user.id}
+              onChange={(e) => handleChange(e)}
+
             />
             <TextField
               id="outlined-uncontrolled"
-              label="Name"
-              value={props.data.name}
+              label="name"
+              name="name"
+              value={user.name}
+              onChange={(e) => handleChange(e)}
             />
             <TextField
               id="outlined-uncontrolled"
               label="UserName"
-              value={props.data.username}
+              name="username"
+              value={user.username}
+              onChange={(e) => handleChange(e)}
             />
             <TextField
               id="outlined-uncontrolled"
               label="Email"
-              value={props.data.email}
+              name="email"
+              value={user.email}
+              onChange={(e) => handleChange(e)}
             />
             <TextField
               id="outlined-uncontrolled"
               label="Phone"
-              value={props.data.phone}
+              name="phone"
+              value={user.phone}
+              onChange={(e) => handleChange(e)}
             />
             <TextField
               id="outlined-uncontrolled"
               label="Website"
-              value={props.data.website}
+              name="website"
+              value={user.website}
+              onChange={(e) => handleChange(e)}
             />
-            {props.data.address && <TextField
+            {user.address && <TextField
               id="outlined-uncontrolled"
               label="Address Street"
-              value={props.data.address.street}
+              name="street"
+              value={user.address.street}
+              onChange={(e) => handleAddress(e)}
             />
             }
-            {props.data.address && <TextField
+            {user.address && <TextField
               id="outlined-uncontrolled"
               label="Address Suite"
-              value={props.data.address.street}
+              name="suite"
+              value={user.address.suite}
+              onChange={(e) => handleAddress(e)}
             />
             }
-            {props.data.address && <TextField
+            {user.address && <TextField
               id="outlined-uncontrolled"
               label="Address city"
-              value={props.data.address.city}
+              name="city"
+              value={user.address.city}
+              onChange={(e) => handleAddress(e)}
             />
             }
-            {props.data.address && <TextField
+            {user.address && <TextField
               id="outlined-uncontrolled"
               label="Address zipcode"
-              value={props.data.address.zipcode}
+              name="zipcode"
+              value={user.address.zipcode}
+              onChange={(e) => handleAddress(e)}
             />
             }
-            {props.data.company && <TextField
+            {user.company && <TextField
               id="outlined-uncontrolled"
               label="Company Name"
-              value={props.data.company.name}
+              name="name"
+              value={user.company.name}
+              onChange={(e) => handleCompany(e)}
             />
             }
-            {props.data.company && <TextField
+            {user.company && <TextField
               id="outlined-uncontrolled"
               label="company catchPhrase"
-              value={props.data.company.catchPhrase}
+              name="catchPhrase"
+              value={user.company.catchPhrase}
+              onChange={(e) => handleCompany(e)}
             />
             }
-            {props.data.company && <TextField
+            {user.company && <TextField
               id="outlined-uncontrolled"
               label="company bs"
-              value={props.data.company.bs}
+              name="bs"
+              value={user.company.bs}
+              onChange={(e) => handleCompany(e)}
             />
             }
-            {props.data.address && <TextField
+            {user.address && <TextField
               id="outlined-uncontrolled"
               label="geo lat"
-              value={props.data.address.geo.lat}
+              name="lat"
+              value={user.address.geo.lat}
+              onChange={(e) => handleAddressGeo(e)}
             />
             }
-            {props.data.address && <TextField
+            {user.address && <TextField
               id="outlined-uncontrolled"
               label="geo lag"
-              value={props.data.address.geo.lat}
+              name="lng"
+              value={user.address.geo.lng}
+              onChange={(e) => handleAddressGeo(e)}
             />
             }
           </Box>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={props.closeButton}>
+          <Button autoFocus onClick={updateChanges} onClose={props.closeButton}>
             Save changes
           </Button>
         </DialogActions>
@@ -160,3 +246,4 @@ export default function BasicModal(props) {
     </div>
   );
 }
+
