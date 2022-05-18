@@ -64,7 +64,6 @@ export default function BasicModal(props) {
   const handleAddressGeo = (e) => {
     user.address.geo[e.target.name] = e.target.value
     setUser({ ...user })
-    console.log(user);
   }
   const handleCompany = (e) => {
     user.company[e.target.name] = e.target.value
