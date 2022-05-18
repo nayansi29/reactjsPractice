@@ -48,8 +48,9 @@ BootstrapDialogTitle.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 export default function BasicModal(props) {
+  console.log(props);
   const [user, setUser] = useState({ ...props.data });
-  const [userDetails, setUserDetails] = useState({});
+
   React.useEffect(() => {
     setUser(props.data);
   }, [props.data])
@@ -71,34 +72,7 @@ export default function BasicModal(props) {
 
   }
 
-  const updateChanges = () => {
-    const items = { ...user };
-    const userId = items.id;
-    // axios.put('https://jsonplaceholder.typicode.com/users/{userId}', items)
-    //   .then(res => {
-    //     console.log(res.data);
-    //     // setData(res.data);
-    //     setLoading(false);
-    //   }).catch(error => {
-    //     setLoading(false);
-    //     console.log(error);
-    //   });
-    fetch(`https://jsonplaceholder.typicode.com/users/${userId}`, {
-      method: 'PUT',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(items)
-    }).then((result) => {
-      result.json()
-        .then((resp) => {
-          setUserDetails({ resp });
-          console.warn(resp);
-        })
-    });
-    props.closeButton();
-  }
+
   return (
     <div>
       <BootstrapDialog
@@ -237,7 +211,7 @@ export default function BasicModal(props) {
           </Box>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={updateChanges} onClose={props.closeButton}>
+          <Button autoFocus onClick={() => props.updateChange(user)} onClose={props.closeButton}>
             Save changes
           </Button>
         </DialogActions>

@@ -8,6 +8,7 @@ export default class Users extends Component {
     loading: true,
     open: false,
     data: [],
+    showData: [],
   };
   getRequest = async () => {
     try {
@@ -26,6 +27,27 @@ export default class Users extends Component {
   }
   closeButton = () => {
     this.setState({ open: false });
+  }
+
+  updateChange = (user) => {
+    const items = user;
+    const userId = items.id;
+    fetch(`https://jsonplaceholder.typicode.com/users/${userId}`, {
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(items)
+    }).then((result) => {
+      result.json()
+        .then((resp) => {
+          console.log(resp);
+          this.setState({})
+        })
+      this.closeButton();
+    });
+
   }
   renderTable = () => {
     return this.state.persons.map(user => {
@@ -65,7 +87,8 @@ export default class Users extends Component {
     else {
       return (
         <div>
-          <BasicModal open={this.state.open} data={this.state.data} closeButton={this.closeButton} />
+          <BasicModal open={this.state.open} data={this.state.data} closeButton={this.closeButton}
+            updateChange={this.updateChange} />
           <h1 id="title">API Table</h1>
           <table id="users" className='table'>
             <thead>
