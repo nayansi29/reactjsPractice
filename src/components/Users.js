@@ -25,6 +25,12 @@ export default class Users extends Component {
       console.error(err);
     }
   }
+
+
+  addUserDailog = () => {
+    this.setState({ open: true });
+
+  }
   updateChange = async (user) => {
     const items = user;
     const userId = items.id;
@@ -123,6 +129,7 @@ export default class Users extends Component {
           <BasicModal open={this.state.open} data={this.state.data} closeButton={this.closeButton}
             updateChange={this.updateChange} />
           <h1 id="title">API Table</h1>
+          <Button variant="contained" onClick={() => { this.addUserDailog() }}>Add New</Button>
           <TableContainer >
             <Table>
               <TableHead>
