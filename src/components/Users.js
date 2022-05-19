@@ -8,7 +8,6 @@ export default class Users extends Component {
     loading: true,
     open: false,
     data: [],
-    showData: [],
   };
   getRequest = async () => {
     try {
@@ -28,7 +27,6 @@ export default class Users extends Component {
   closeButton = () => {
     this.setState({ open: false });
   }
-
   updateChange = (user) => {
     const items = user;
     const userId = items.id;
@@ -39,15 +37,14 @@ export default class Users extends Component {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(items)
-    }).then((result) => {
-      result.json()
-        .then((resp) => {
-          console.log(resp);
-          this.setState({})
-        })
+    }).then(data => {
+      console.log(data);
+      const updatedPersons = this.state.persons.map(values => values.id === userId ? { ...values, ...items } : values);
+      this.setState({
+        persons: updatedPersons,
+      });
       this.closeButton();
     });
-
   }
   renderTable = () => {
     return this.state.persons.map(user => {
