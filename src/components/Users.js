@@ -1,6 +1,13 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import BasicModal from './BasicModal';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Button from '@mui/material/Button';
 
 export default class Users extends Component {
   state = {
@@ -18,54 +25,83 @@ export default class Users extends Component {
       console.error(err);
     }
   }
-  componentDidMount() {
-    this.getRequest();
-  }
-  handleInput(user) {
-    this.setState({ data: user, open: true });
-  }
-  closeButton = () => {
-    this.setState({ open: false });
-  }
-  updateChange = (user) => {
+  updateChange = async (user) => {
     const items = user;
     const userId = items.id;
-    fetch(`https://jsonplaceholder.typicode.com/users/${userId}`, {
-      method: 'PUT',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(items)
-    }).then(data => {
-      console.log(data);
+    try {
+      const resp = await axios({
+        method: 'PUT',
+        url: 'https://jsonplaceholder.typicode.com/users/' + userId,
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(items)
+      });
       const updatedPersons = this.state.persons.map(values => values.id === userId ? { ...values, ...items } : values);
       this.setState({
         persons: updatedPersons,
       });
       this.closeButton();
-    });
+      console.log(resp);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+  deleteChange = async (id) => {
+    try {
+      const resp = await axios({
+        method: 'DELETE',
+        url: 'https://jsonplaceholder.typicode.com/users/' + id,
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+      });
+      const deletePersons = this.state.persons.filter((resp) => {
+        return resp.id !== id;
+      });
+      this.setState({
+        persons: deletePersons,
+      });
+      console.log(resp);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+  componentDidMount() {
+    this.getRequest();
+  }
+  handleInput = (user) => {
+    this.setState({ data: user, open: true });
+  }
+  closeButton = () => {
+    this.setState({ open: false });
   }
   renderTable = () => {
     return this.state.persons.map(user => {
       return (
-        <tr key={user.id} onClick={() => { this.handleInput(user) }}>
-          <td>{user.id}</td>
-          <td>{user.name}</td>
-          <td>{user.username}</td>
-          <td>{user.email}</td>
-          <td>{user.phone}</td>
-          <td>{user.website}</td>
-          <td>{user.address.street}</td>
-          <td>{user.address.suite}</td>
-          <td>{user.address.city}</td>
-          <td>{user.address.zipcode}</td>
-          <td>{user.company.name}</td>
-          <td>{user.company.catchPhrase}</td>
-          <td>{user.company.bs}</td>
-          <td>{user.address.geo.lat}</td>
-          <td>{user.address.geo.lng}</td>
-        </tr>
+        <TableRow key={user.id}>
+          <TableCell>{user.id}</TableCell>
+          <TableCell>{user.name}</TableCell>
+          <TableCell>{user.username}</TableCell>
+          <TableCell>{user.email}</TableCell>
+          <TableCell>{user.phone}</TableCell>
+          <TableCell>{user.website}</TableCell>
+          <TableCell>{user.address.street}</TableCell>
+          <TableCell>{user.address.suite}</TableCell>
+          <TableCell>{user.address.city}</TableCell>
+          <TableCell>{user.address.zipcode}</TableCell>
+          <TableCell>{user.company.name}</TableCell>
+          <TableCell>{user.company.catchPhrase}</TableCell>
+          <TableCell>{user.company.bs}</TableCell>
+          <TableCell>{user.address.geo.lat}</TableCell>
+          <TableCell>{user.address.geo.lng}</TableCell>
+          <TableCell>
+            <Button variant="contained" onClick={() => { this.handleInput(user) }}>Edit</Button>
+            <Button variant="contained" onClick={() => { this.deleteChange(user.id) }}>Delete</Button>
+          </TableCell>
+        </TableRow>
       )
     });
   }
@@ -87,28 +123,31 @@ export default class Users extends Component {
           <BasicModal open={this.state.open} data={this.state.data} closeButton={this.closeButton}
             updateChange={this.updateChange} />
           <h1 id="title">API Table</h1>
-          <table id="users" className='table'>
-            <thead>
-              <tr>
-                <th>id</th>
-                <th>Name</th>
-                <th>UserName</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Website</th>
-                <th>Address street</th>
-                <th>Address suite</th>
-                <th>Address city</th>
-                <th>Address Zipcode</th>
-                <th>company Name</th>
-                <th>company catchPhrase</th>
-                <th>company bs</th>
-                <th>geo lat</th>
-                <th>geo  lng</th>
-              </tr>
-            </thead>
-            <tbody>{this.renderTable()}</tbody>
-          </table>
+          <TableContainer >
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>id</TableCell>
+                  <TableCell>Name</TableCell>
+                  <TableCell>UserName</TableCell>
+                  <TableCell>Email</TableCell>
+                  <TableCell>Phone</TableCell>
+                  <TableCell>Website</TableCell>
+                  <TableCell>Address street</TableCell>
+                  <TableCell>Address suite</TableCell>
+                  <TableCell>Address city</TableCell>
+                  <TableCell>Address Zipcode</TableCell>
+                  <TableCell>company Name</TableCell>
+                  <TableCell>company catchPhrase</TableCell>
+                  <TableCell>company bs</TableCell>
+                  <TableCell>geo lat</TableCell>
+                  <TableCell>geo  lng</TableCell>
+                  <TableCell>Action</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>{this.renderTable()}</TableBody>
+            </Table>
+          </TableContainer>
         </div>
       )
     }
