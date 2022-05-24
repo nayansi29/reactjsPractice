@@ -138,147 +138,101 @@ export default function BasicModal(props) {
             />
 
             {user.address
-              ? <TextField
+              && <TextField
                 id="outlined-uncontrolled"
                 label="Address Street"
                 name="street"
                 value={user.address.street}
                 onChange={(e) => handleAddress(e)}
               />
-              : <TextField
-                id="outlined-uncontrolled"
-                label="Address Street"
-                name="street"
 
-              />
             }
             {user.address
-              ? <TextField
+              && <TextField
                 id="outlined-uncontrolled"
                 label="Address Suite"
                 name="suite"
                 value={user.address.suite}
                 onChange={(e) => handleAddress(e)}
               />
-              :
-              <TextField
-                id="outlined-uncontrolled"
-                label="Address Suite"
-                name="suite"
-              />
             }
             {user.address
-              ? <TextField
+              && <TextField
                 id="outlined-uncontrolled"
                 label="Address city"
                 name="city"
                 value={user.address.city}
                 onChange={(e) => handleAddress(e)}
               />
-              :
-              <TextField
-                id="outlined-uncontrolled"
-                label="Address city"
-                name="city"
-              />
             }
             {user.address
-              ? <TextField
+              && <TextField
                 id="outlined-uncontrolled"
                 label="Address zipcode"
                 name="zipcode"
                 value={user.address.zipcode}
                 onChange={(e) => handleAddress(e)}
               />
-              :
-              <TextField
-                id="outlined-uncontrolled"
-                label="Address zipcode"
-                name="zipcode"
-              />
             }
             {user.company
-              ? <TextField
+              && <TextField
                 id="outlined-uncontrolled"
                 label="Company Name"
                 name="name"
                 value={user.company.name}
                 onChange={(e) => handleCompany(e)}
               />
-              :
-              <TextField
-                id="outlined-uncontrolled"
-                label="Company Name"
-                name="name"
-              />
+
             }
             {user.company
-              ? <TextField
+              && <TextField
                 id="outlined-uncontrolled"
                 label="company catchPhrase"
                 name="catchPhrase"
                 value={user.company.catchPhrase}
                 onChange={(e) => handleCompany(e)}
               />
-              :
-              <TextField
-                id="outlined-uncontrolled"
-                label="company catchPhrase"
-                name="catchPhrase"
-              />
             }
             {user.company
-              ? <TextField
+              && <TextField
                 id="outlined-uncontrolled"
                 label="company bs"
                 name="bs"
                 value={user.company.bs}
                 onChange={(e) => handleCompany(e)}
               />
-              :
-              <TextField
-                id="outlined-uncontrolled"
-                label="company bs"
-                name="bs"
-              />
             }
             {user.address
-              ? <TextField
+              && <TextField
                 id="outlined-uncontrolled"
                 label="geo lat"
                 name="lat"
                 value={user.address.geo.lat}
                 onChange={(e) => handleAddressGeo(e)}
               />
-              :
-              <TextField
-                id="outlined-uncontrolled"
-                label="geo lat"
-                name="lat"
-
-              />
             }
             {user.address
-              ? <TextField
+              && <TextField
                 id="outlined-uncontrolled"
                 label="geo lag"
                 name="lng"
                 value={user.address.geo.lng}
                 onChange={(e) => handleAddressGeo(e)}
               />
-              :
-              <TextField
-                id="outlined-uncontrolled"
-                label="geo lag"
-                name="lag"
-              />
+
             }
           </Box>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={() => props.updateChange(user)} onClose={props.closeButton}>
-            Save changes
-          </Button>
+          {user.id
+            ? <Button autoFocus onClick={() => props.updateChange(user)} onClose={props.closeButton}>
+              Save changes
+            </Button>
+            :
+            <Button autoFocus onClick={() => props.addUser(user)} onClose={props.closeButton}>
+              add User
+            </Button>
+          }
         </DialogActions>
       </BootstrapDialog>
     </div>

@@ -28,7 +28,27 @@ export default class Users extends Component {
 
 
   addUserDailog = () => {
-    this.setState({ open: true });
+    const data = {
+
+      "name": "",
+      "username": "",
+      "email": "",
+      "address": {
+        "street": "",
+        "suite": "",
+        "city": "",
+        "zipcode": "",
+        "geo": {
+          "lat": "",
+          "lng": ""
+        }
+      }
+    }
+    this.setState({ data, open: true });
+
+  }
+
+  addUser = (user) => {
 
   }
   updateChange = async (user) => {
@@ -127,7 +147,7 @@ export default class Users extends Component {
       return (
         <div>
           <BasicModal open={this.state.open} data={this.state.data} closeButton={this.closeButton}
-            updateChange={this.updateChange} />
+            updateChange={this.updateChange} addUser={this.addUser} />
           <h1 id="title">API Table</h1>
           <Button variant="contained" onClick={() => { this.addUserDailog() }}>Add New</Button>
           <TableContainer >

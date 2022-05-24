@@ -9,12 +9,17 @@ import Logout from "./components/Logout";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Dasboard from "./components/Dasboard";
 import DynamicTable from "./dynamic-table/DynamicTable";
+import GeoLocation from "./components/GeoLocation";
 import UserData from "./components/UserData";
+import SearchBar from "./components/SearchBar";
 
 function App() {
 
   let isLogged = true;
   const data = { user: 'user Not Logged In', };
+  const onSearchSubmit = (term) => {
+    console.log(term);
+  }
 
   return (
     <BrowserRouter>
@@ -30,6 +35,8 @@ function App() {
         <Route path="/dashboard" element={isLogged ? <Dasboard /> : <Navigate to="/login" state={data} replace />} />
         <Route path="/header/:category" element={<Header />} />
         <Route path="/header/:category/:id" element={<Header />} />
+        <Route path="/geolocation" element={<GeoLocation />} />
+        <Route path="/searchbar" element={<SearchBar onSubmit={onSearchSubmit} />} />
         <Route path="*" element={<h1> Error 404 Page Not Found</h1>} />
       </Routes>
     </BrowserRouter>

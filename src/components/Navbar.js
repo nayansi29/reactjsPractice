@@ -31,6 +31,12 @@ function Navbar() {
           <li className="nav-item">
             <NavLink className="nav-link" to="/users" style={setActive}>Users</NavLink>
           </li>
+          <li className="nav-item">
+            <NavLink className="nav-link" to="/geolocation" style={setActive}>Get Geo Location</NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink className="nav-link" to="/searchbar" style={setActive}>get car Image</NavLink>
+          </li>
 
           {/* <li className="nav-item">
             <NavLink className="nav-link" to="/userdata" style={setActive}>UserData</NavLink>
