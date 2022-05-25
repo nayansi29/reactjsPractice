@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Signup from "./components/Signup";
 import Navbar from "./components/Navbar";
 import Booking from "./components/Booking";
@@ -10,18 +10,30 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Dasboard from "./components/Dasboard";
 import DynamicTable from "./dynamic-table/DynamicTable";
 import GeoLocation from "./components/GeoLocation";
-import UserData from "./components/UserData";
+// import UserData from "./components/UserData";
+import ImagesList from "./components/ImagesList";
 import SearchBar from "./components/SearchBar";
+import axios from "axios";
 
 function App() {
+  const [images, setImages] = useState([]);
 
   let isLogged = true;
   const data = { user: 'user Not Logged In', };
-  const onSearchSubmit = (term) => {
-    console.log(term);
+  const onSearchSubmit = async (term) => {
+    const response = await axios.get('https://api.unsplash.com/search/photos', {
+      params: { query: term },
+      headers: {
+        Authorization: 'Client-ID t0iOXiDrCilNuy3j7omJiwIL2UlTQw_8_aluoUGuLB8'
+      }
+    });
+    setImages(response.data.results);
+
   }
 
+
   return (
+
     <BrowserRouter>
       <Navbar />
       <Routes>
@@ -39,7 +51,9 @@ function App() {
         <Route path="/searchbar" element={<SearchBar onSubmit={onSearchSubmit} />} />
         <Route path="*" element={<h1> Error 404 Page Not Found</h1>} />
       </Routes>
+      <ImagesList images={images} />
     </BrowserRouter>
+
   );
 }
 export default App;

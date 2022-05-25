@@ -19,6 +19,7 @@ export default class SearchBar extends Component {
                         <input type="text" value={this.state.term} onChange={this.onInputChange} />
                     </form>
                 </div>
+
             </div>
         )
     }
